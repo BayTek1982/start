@@ -275,13 +275,14 @@ const APPS=[
   ["spiele","🎲","Spiele","Mensch ärgere dich nicht, Schach und mehr."],
   ["blockrausch","🧱","Blockrausch","Das Blockspiel."],
   ["formel1simulator","🏎️","Formel-1-Simulator","Rennen in 3D: Grand Prix, Meisterschaft, Knockout und Zeitfahren."],
+  ["flugsimulator","🛩️","Flugsimulator","Du bist der Pilot: Starten, Landen und Notfälle im Cockpit meistern."],
   ["fussball","⚽","Fußball-Live","Ergebnisse, Tabellen, Aufstellungen."],
   ["film","🎬","Filmarchiv","Filme und Serien aller Dienste."],
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."],
   ["demo","🌌","Demo-Bühne","3D-Szenen und Naturgewalten."]]}
 ];
-const NEU=["formel1simulator","trading","btc","blockchain","finanzen","ct","guss","technik","flug","naturgewalten","lernen","chronik","auto","arbeitszeit","familie","energie","fotos","kanaele"];
+const NEU=["formel1simulator","flugsimulator","trading","btc","blockchain","finanzen","ct","guss","technik","flug","naturgewalten","lernen","chronik","auto","arbeitszeit","familie","energie","fotos","kanaele"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
