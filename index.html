@@ -10,8 +10,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.thema=localStorage.getItem("kompass_thema")||"dunkel"}catch(e){}</script>
 <style>
-:root{--bg:#05080d;--card:#0f1620;--card2:#0b1118;--line:#1b2532;--txt:#dfe6ef;--mut:#7f8b9c;
+:root{--bg:var(--bg);--card:#0f1620;--card2:#0b1118;--line:#1b2532;--txt:#dfe6ef;--mut:#7f8b9c;
  --grn:#1fcf8f;--red:#f0605d;--gold:#f5c542;--blue:#4c9aff;--lila:#b388ff;--orange:#ff9f43;--acc:var(--grn);
  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -99,6 +100,17 @@ section:not([hidden])>*:nth-child(n+6),.kpis>*:nth-child(n+6),.anim>*:nth-child(
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 ::selection{background:color-mix(in srgb,var(--acc) 35%,transparent)}
 
+/* ---------- Hell-Modus ---------- */
+html[data-thema=hell]{--bg:#f3f5f8;--card:#ffffff;--card2:#eef1f5;--line:#d7dde5;--txt:#111a26;--mut:#5d6878;
+ --grn:#0fa872;--red:#d9443f;--gold:#c99a0a;--blue:#2f7be0;--lila:#8a5ce6;--orange:#e7801c}
+html[data-thema=hell] body{background-image:radial-gradient(900px 400px at 100% -10%,color-mix(in srgb,var(--acc) 7%,transparent),transparent 70%)}
+html[data-thema=hell] .card,html[data-thema=hell] .kpi,html[data-thema=hell] .k{box-shadow:0 1px 3px #0000000d}
+html[data-thema=hell] h1{text-shadow:none}
+html,body{transition:background-color .3s,color .3s}
+header.kopf{position:relative}
+.thema{position:absolute;right:0;top:0;width:42px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:1.1rem;cursor:pointer;transition:.2s;z-index:3}
+.thema:hover{border-color:var(--acc);box-shadow:0 0 14px color-mix(in srgb,var(--acc) 25%,transparent)}
+
 .top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
 #uhr{font-family:var(--mono);font-weight:800;font-size:1.9rem;font-variant-numeric:tabular-nums;color:var(--txt);letter-spacing:.02em}
 #uhr small{font-size:.55em;color:var(--mut);margin-left:2px}
@@ -122,7 +134,7 @@ section:not([hidden])>*:nth-child(n+6),.kpis>*:nth-child(n+6),.anim>*:nth-child(
 .k .fuss{margin-top:auto;padding-top:14px;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
 .k .fuss .pf{margin-left:auto;font-size:1.4rem;color:var(--f);line-height:1;transition:.25s}
 .k:hover .pf{transform:translateX(4px)}
-.k .neu{color:var(--f);border:1px solid var(--f);border-radius:999px;padding:1px 8px;background:#05080d}
+.k .neu{color:var(--f);border:1px solid var(--f);border-radius:999px;padding:1px 8px;background:var(--bg)}
 .k .bar{flex:1;height:5px;background:var(--card2);border-radius:4px;overflow:hidden;max-width:160px}
 .k .bar div{height:100%;background:var(--f);box-shadow:0 0 8px var(--f);border-radius:4px}
 .stern{position:absolute;right:62px;top:16px;z-index:2;background:none;border:none;font-size:1rem;cursor:pointer;color:#2a3646;transition:.2s}
@@ -136,7 +148,7 @@ section:not([hidden])>*:nth-child(n+6),.kpis>*:nth-child(n+6),.anim>*:nth-child(
 .kurs{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-family:var(--mono);font-size:.9rem;font-variant-numeric:tabular-nums;border-bottom:1px dashed var(--line)}
 .kurs:last-child{border:none}
 .kurs b{color:var(--txt)}
-.pille{font-family:var(--mono);font-size:.72rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:8px;background:#05080d}
+.pille{font-family:var(--mono);font-size:.72rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:8px;background:var(--bg)}
 footer{color:var(--mut);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin:36px 0 10px}
 </style>
 </head>
@@ -144,7 +156,7 @@ footer{color:var(--mut);font-family:var(--mono);font-size:.68rem;letter-spacing:
 <div class="wrap">
 <div class="top">
  <div><div class="meta" id="meta">&nbsp;</div><h1>Kompass Apps</h1><div class="mini" id="gruss" style="margin-top:6px"></div></div>
- <div id="uhr"></div>
+ <div style="display:flex;gap:10px;align-items:center"><div id="uhr"></div><button class="thema" id="themaBtn" title="Hell/Dunkel" style="position:static">☀️</button></div>
 </div>
 
 <div class="bento anim" id="infos">
@@ -195,25 +207,25 @@ function sicherung(el,app,getData,setData){
  el.querySelector('input[type=file]').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(d.app!==app)throw 0;await setData(d.daten);info.textContent="✅ Sicherung geladen."}catch(err){info.textContent="❌ Diese Datei passt nicht zu dieser App."}};
 }
 /* Farben aus CSS lesen */
-const farbeVar=n=>getComputedStyle(document.body).getPropertyValue(n).trim()||"#1fcf8f";
+const farbeVar=n=>getComputedStyle(document.body).getPropertyValue(n).trim()||"#7f8b9c";
 /* Pille im Diagramm: dunkler Hintergrund, farbiger Rahmen, Mono-Schrift */
 function pille(g,text,x,y,farbe,ausr="center"){g.font="700 11px 'JetBrains Mono',monospace";const w=g.measureText(text).width+14,h=20;
  let x0=ausr==="center"?x-w/2:ausr==="right"?x-w:x;x0=Math.max(2,Math.min(x0,g.canvas.clientWidth-w-2));
- g.fillStyle="#05080d";g.strokeStyle=farbe;g.lineWidth=1;g.beginPath();g.roundRect(x0,y-h/2,w,h,10);g.fill();g.stroke();
+ g.fillStyle=farbeVar("--bg");g.strokeStyle=farbe;g.lineWidth=1;g.beginPath();g.roundRect(x0,y-h/2,w,h,10);g.fill();g.stroke();
  g.fillStyle=farbe;g.textBaseline="middle";g.fillText(text,x0+7,y+1);g.textBaseline="alphabetic"}
 /* Balkendiagramm im Terminal-Look */
 function balken(canvas,labels,werte,opt={}){const d=devicePixelRatio||1,W=canvas.clientWidth,H=opt.h||230;canvas.width=W*d;canvas.height=H*d;canvas.style.height=H+"px";const g=canvas.getContext("2d");g.scale(d,d);g.clearRect(0,0,W,H);
  const acc=opt.farbe||farbeVar("--acc");
- if(!werte.length||werte.every(v=>!v)){g.fillStyle="#7f8b9c";g.font="13px Inter,system-ui";g.fillText(opt.leer||"Noch keine Daten",10,30);return}
+ if(!werte.length||werte.every(v=>!v)){g.fillStyle=farbeVar("--mut");g.font="13px Inter,system-ui";g.fillText(opt.leer||"Noch keine Daten",10,30);return}
  const mx=Math.max(...werte,0)*1.18||1,L=44,B=26,T=14,bw=(W-L-6)/werte.length;
- g.font="600 10px 'JetBrains Mono',monospace";g.strokeStyle="#1b2532";g.setLineDash([3,4]);
- for(let i=0;i<=3;i++){const v=mx*i/3,y=T+(H-T-B)*(1-i/3);g.beginPath();g.moveTo(L,y);g.lineTo(W,y);g.stroke();g.fillStyle="#7f8b9c";g.fillText(zahl(v,v<10&&mx<10?1:0),2,y+4)}
+ g.font="600 10px 'JetBrains Mono',monospace";g.strokeStyle=farbeVar("--line");g.setLineDash([3,4]);
+ for(let i=0;i<=3;i++){const v=mx*i/3,y=T+(H-T-B)*(1-i/3);g.beginPath();g.moveTo(L,y);g.lineTo(W,y);g.stroke();g.fillStyle=farbeVar("--mut");g.fillText(zahl(v,v<10&&mx<10?1:0),2,y+4)}
  g.setLineDash([]);
  const imax=werte.indexOf(Math.max(...werte));
  werte.forEach((v,i)=>{const h=(H-T-B)*(v/mx),x=L+i*bw+bw*.18,w=bw*.64,y=H-B-h;
   const gr=g.createLinearGradient(0,y,0,H-B);gr.addColorStop(0,acc);gr.addColorStop(1,acc+"33");
   g.save();if(i===imax){g.shadowColor=acc;g.shadowBlur=14}g.fillStyle=gr;g.beginPath();g.roundRect(x,y,w,h,[4,4,0,0]);g.fill();g.restore();
-  g.fillStyle="#7f8b9c";g.font="600 10px 'JetBrains Mono',monospace";if(werte.length<=14||i%2===0)g.fillText(labels[i],L+i*bw+bw*.5-g.measureText(labels[i]).width/2,H-8)});
+  g.fillStyle=farbeVar("--mut");g.font="600 10px 'JetBrains Mono',monospace";if(werte.length<=14||i%2===0)g.fillText(labels[i],L+i*bw+bw*.5-g.measureText(labels[i]).width/2,H-8)});
  if(werte[imax])pille(g,(opt.fmt||zahl)(werte[imax]),L+imax*bw+bw/2,T+(H-T-B)*(1-werte[imax]/mx)-14,acc);
 }
 /* Kopfzeile: kleine graue Zeile */
@@ -301,6 +313,11 @@ async function krypto(){try{
  $("#k-stand").textContent="Stand "+new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
 }catch(e){$("#krypto").innerHTML='<div class="d">Nicht erreichbar – <a href="https://markt.kompassapps.de">Markt öffnen</a></div>'}}
 zeichnen();wetter();krypto();setInterval(krypto,120000);
+
+/* Hell/Dunkel-Umschalter */
+(function(){const b=document.getElementById("themaBtn");if(!b)return;const set=t=>{document.documentElement.dataset.thema=t;b.textContent=t==="hell"?"🌙":"☀️";b.title=t==="hell"?"Dunkel":"Hell";
+ const m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==="hell"?"#f3f5f8":"#05080d";try{localStorage.setItem("kompass_thema",t)}catch(e){}if(window._tb)dispatchEvent(new Event("resize"))};
+ set(document.documentElement.dataset.thema||"dunkel");window._tb=1;b.onclick=()=>set(document.documentElement.dataset.thema==="hell"?"dunkel":"hell")})();
 </script>
 </body>
 </html>
