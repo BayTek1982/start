@@ -142,7 +142,7 @@ header.kopf{position:relative}
 .k .bar div{height:100%;background:var(--f);box-shadow:0 0 8px var(--f);border-radius:4px}
 .stern{position:absolute;right:62px;top:16px;z-index:2;background:none;border:none;font-size:1rem;cursor:pointer;color:#2a3646;transition:.2s}
 .stern.an{color:var(--gold);text-shadow:0 0 10px var(--gold)}
-.bereich{margin-top:30px}
+.bereich{margin-top:30px;scroll-margin-top:12px}
 .bereich .bk{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
 .bereich h2{font-size:.9rem}
 .bereich .anz{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--mut)}
@@ -175,6 +175,7 @@ footer{color:var(--mut);font-family:var(--mono);font-size:.68rem;letter-spacing:
 </div>
 
 <div style="margin-top:22px"><input class="suche" id="suche" placeholder="🔍  App suchen …" autocomplete="off"></div>
+<nav id="spruenge" style="margin:14px -14px 0"></nav>
 <div id="bereiche"></div>
 <footer>kompassapps.de · ★ antippen = Favorit</footer>
 </div>
@@ -239,37 +240,52 @@ const APPS=[
   ["scanner","₿","Coin-Scanner","Die besten Coins des Tages, Golden Zone und Hitze auf einen Blick."],
   ["markt","📈","Markt","Aktien, Krypto und Rohstoffe als Kacheln – wie Finanzen100."],
   ["chart","🕯️","Live-Chart","Live-Charts mit deinen eigenen Indikatoren."],
-  ["trading","📒","Trading-Tagebuch","Trades festhalten, Trefferquote sehen, Haltefrist im Blick.",1],
+  ["btc","🟠","BTC-Terminal","Bitcoin live im Terminal – Bildschirm bleibt wach."],
+  ["trading","📒","Trading-Tagebuch","Trades festhalten, Trefferquote sehen, Haltefrist im Blick."],
   ["nachrichten","📰","Meine Nachrichten","Das tägliche Börsen-Briefing."],
   ["morgen","☕","Morgenroutine","Deine Analyse am Morgen."]]},
+ {g:"Lernen & Wissen",f:"--gold",l:[
+  ["chartschule","🕯️","Chart-Schule","Kerzen, Muster und Trendlinien einfach erklärt."],
+  ["blockchain","⛓️","Krypto-Schule","Blockchain, Wallets, Futures, Hebel und Steuern."],
+  ["finanzen","💶","Finanz-Schule","Aktien, ETFs, Zinseszins und Sparpläne mit Rechnern."],
+  ["ct","☢️","CT-Schule","Röntgentechnik und Computertomographie verstehen."],
+  ["guss","🔬","Gussfehler-Schule","Porosität, Gasblasen, Lunker und Kernbruch."],
+  ["technik","⚙️","Auto-Technik-Schule","Motor, Getriebe, Turbo, E-Auto und Akku."],
+  ["flug","✈️","Flug-Schule","Wie ein Flugzeug fliegt und gebaut wird."],
+  ["naturgewalten","🌪️","Naturgewalten-Schule","Gewitter, Tornados, Hurrikane, Vulkane, Erdbeben."],
+  ["lernen","🎓","Lern-App","Mathe und Englisch für die Kinder – spielerisch."],
+  ["chronik","🏆","Fußball-Chronik","Sieger, Torschützenkönige und Turnierpläne."]]},
  {g:"Alltag",f:"--blue",l:[
   ["wetter","🌦️","Wetter","Wetter und Regenradar für Ergolding – ohne Werbung."],
   ["tanken","⛽","Tanken","Aktuelle Spritpreise in der Umgebung."],
   ["einkauf","🛒","Einkauf","Einkaufsliste mit Angeboten der Märkte."],
-  ["auto","🚗","Auto-Logbuch","Touran: Tanken, Werkstatt, TÜV und Reifen.",1],
-  ["mogel","🔎","Mogel-Check","Mogelpackungen erkennen."],
+  ["auto","🚗","Auto-Logbuch","Touran: Tanken, Werkstatt, TÜV und Reifen."],
+  ["arbeitszeit","⏱️","Arbeitszeit","Kommen und Gehen stempeln."],
   ["kalender","🗓️","Kalender","Termine und Notizbuch."],
+  ["mogel","🔎","Mogel-Check","Mogelpackungen erkennen."],
   ["rechner","🧮","Rechner","Der Taschenrechner."],
   ["uebersetzer","🌍","Übersetzer","Sprechen und Text in 17 Sprachen."]]},
  {g:"Familie & Zuhause",f:"--orange",l:[
-  ["familie","👨‍👩‍👧‍👦","Familien-Planer","Ämtchen, Punkte, Taschengeld und Wochenplan.",1],
+  ["familie","👨‍👩‍👧‍👦","Familien-Planer","Ämtchen, Punkte, Taschengeld und Wochenplan."],
   ["haus","🏡","Unser Haus","Das Haus in 3D mit Rundgang."],
-  ["energie","⚡","Haus & Energie","Zählerstände, Verbrauch und Nebenkosten.",1],
-  ["fotos","🖼️","Fotoarchiv","Familienbilder und Videos nach Jahren sortiert.",1],
-  ["lernen","🎓","Lern-App","Mathe und Englisch spielerisch üben.",1]]},
+  ["energie","⚡","Haus & Energie","Zählerstände, Verbrauch und Nebenkosten."],
+  ["fotos","🖼️","Fotoarchiv","Familienbilder und Videos nach Jahren sortiert."],
+  ["advent","🎄","Adventskalender","Jeden Tag ein neues Rätsel für die Familie."]]},
  {g:"Spiele & Freizeit",f:"--lila",l:[
-  ["spiele","🎲","Spiele","Mensch ärgere dich nicht und mehr."],
-  ["schach","♟️","Familien-Schach","Gegeneinander oder gegen den Computer."],
+  ["spiele","🎲","Spiele","Mensch ärgere dich nicht, Schach und mehr."],
   ["blockrausch","🧱","Blockrausch","Das Blockspiel."],
   ["fussball","⚽","Fußball-Live","Ergebnisse, Tabellen, Aufstellungen."],
   ["film","🎬","Filmarchiv","Filme und Serien aller Dienste."],
-  ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
+  ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
+  ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."],
+  ["demo","🌌","Demo-Bühne","3D-Szenen und Naturgewalten."]]}
 ];
+const NEU=["trading","btc","blockchain","finanzen","ct","guss","technik","flug","naturgewalten","lernen","chronik","auto","arbeitszeit","familie","energie","fotos","kanaele"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
 
-function kachel({a,f},breit,extra=""){const [sub,ico,name,besch,neu]=a;const fav=favs.includes(sub);
+function kachel({a,f},breit,extra=""){const [sub,ico,name,besch]=a;const neu=NEU.includes(sub);const fav=favs.includes(sub);
  return `<a class="k ${breit?"breit":""} ${extra}" style="--f:var(${f})" href="https://${sub}.kompassapps.de" data-s="${(name+" "+besch+" "+sub).toLowerCase()}">
  <button class="stern ${fav?"an":""}" data-fav="${sub}" aria-label="Favorit">★</button><div class="i">${ico}</div>
  <div class="t">${name}</div><div class="d">${besch}</div>
@@ -279,8 +295,10 @@ function gruppe(L){const n=L.length,breit=n%3===2;const zellen=n+(breit?1:0);
 function zeichnen(){let h="";
  const F=ALLE.filter(x=>favs.includes(x.a[0]));
  if(F.length)h+=`<div class="bereich"><div class="bk"><h2 style="color:var(--gold)">★ Favoriten</h2><span class="anz">${F.length} APPS</span></div><div class="bento anim">${gruppe(F)}</div></div>`;
- for(const g of APPS)h+=`<div class="bereich"><div class="bk"><h2 style="color:var(${g.f})">${g.g}</h2><span class="anz">${g.l.length} APPS</span></div><div class="bento anim">${gruppe(g.l.map(a=>({a,f:g.f})))}</div></div>`;
- $("#bereiche").innerHTML=h;filtern()}
+ for(const g of APPS)h+=`<div class="bereich" id="b-${g.g.split(" ")[0].toLowerCase()}"><div class="bk"><h2 style="color:var(${g.f})">${g.g}</h2><span class="anz">${g.l.length} APPS</span></div><div class="bento anim">${gruppe(g.l.map(a=>({a,f:g.f})))}</div></div>`;
+ $("#bereiche").innerHTML=h;
+ $("#spruenge").innerHTML=APPS.map(g=>`<button style="color:var(${g.f});border-color:color-mix(in srgb,var(${g.f}) 45%,transparent)" data-b="b-${g.g.split(" ")[0].toLowerCase()}">${g.g} · ${g.l.length}</button>`).join("");filtern()}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-b]");if(b)document.getElementById(b.dataset.b)?.scrollIntoView({behavior:"smooth",block:"start"})});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(!b)return;e.preventDefault();const s=b.dataset.fav;
  favs=favs.includes(s)?favs.filter(x=>x!==s):[...favs,s];ls.set("kompass_favs",favs);zeichnen()});
 function filtern(){const q=$("#suche").value.trim().toLowerCase();
