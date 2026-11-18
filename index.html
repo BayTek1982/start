@@ -270,7 +270,8 @@ const APPS=[
   ["kalender","🗓️","Kalender","Termine und Notizbuch."],
   ["mogel","🔎","Mogel-Check","Mogelpackungen erkennen."],
   ["rechner","🧮","Rechner","Der Taschenrechner."],
-  ["uebersetzer","🌍","Übersetzer","Sprechen und Text in 17 Sprachen."]]},
+  ["uebersetzer","🌍","Übersetzer","Sprechen und Text in 17 Sprachen."],
+  ["diktat","🎙️","Diktiergerät","Sprechen, korrigieren und Text kopieren."]]},
  {g:"Familie & Zuhause",f:"--orange",l:[
   ["familie","👨‍👩‍👧‍👦","Familien-Planer","Ämtchen, Punkte, Taschengeld und Wochenplan."],
   ["haus","🏡","Unser Haus","Das Haus in 3D mit Rundgang."],
@@ -291,7 +292,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
+const NEU=["diktat","ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
