@@ -256,6 +256,9 @@ const APPS=[
   ["natur","🌿","Natur-Schule","Tierarten, Pflanzen und Bäume mit echten Bildern."],
   ["physik","🧲","Physik-Schule","Physik im Alltag – einfach erklärt."],
   ["weltraum","🪐","Weltraum-Schule","Sonnensystem, Sterne, Galaxien und Raumfahrt."],
+  ["ki","🤖","KI-Schule","Wie ein KI-Modell denkt und lernt."],
+  ["computer","💻","Computer-Schule","Wie ein Computer funktioniert – vom Prozessor bis zum Speicher."],
+  ["zelle","🧬","Zell-Schule","Die biologische Zelle – Aufbau und Aufgaben."],
   ["lernen","🎓","Lern-App","Mathe und Englisch für die Kinder – spielerisch."],
   ["chronik","🏆","Fußball-Chronik","Sieger, Torschützenkönige und Turnierpläne."]]},
  {g:"Alltag",f:"--blue",l:[
@@ -288,7 +291,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator","trading","btc","blockchain","finanzen","ct","guss","technik","flug","naturgewalten","lernen","chronik","auto","arbeitszeit","familie","energie","fotos","kanaele"];
+const NEU=["ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
