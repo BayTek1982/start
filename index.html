@@ -260,6 +260,8 @@ const APPS=[
   ["ki","🤖","KI-Schule","Wie ein KI-Modell denkt und lernt."],
   ["computer","💻","Computer-Schule","Wie ein Computer funktioniert – vom Prozessor bis zum Speicher."],
   ["zelle","🧬","Zell-Schule","Die biologische Zelle – Aufbau und Aufgaben."],
+  ["geld","🪙","Geld-Schule","Wie Geld entstand – vom Tausch über Münzen bis Bitcoin."],
+  ["angeln","🎣","Angel-Schule","Fischkunde, Ausrüstung, Knoten, Köder und Recht in Bayern."],
   ["lernen","🎓","Lern-App","Mathe und Englisch für die Kinder – spielerisch."],
   ["chronik","🏆","Fußball-Chronik","Sieger, Torschützenkönige und Turnierpläne."]]},
  {g:"Alltag",f:"--blue",l:[
@@ -271,6 +273,8 @@ const APPS=[
   ["kalender","🗓️","Kalender","Termine und Notizbuch."],
   ["mogel","🔎","Mogel-Check","Mogelpackungen erkennen."],
   ["rechner","🧮","Rechner","Der Taschenrechner."],
+  ["uhr","⏰","Uhr","Wecker, Weltuhr, Stoppuhr und Timer."],
+  ["handy","📱","Handy-Dashboard","Alles Wichtige fürs Handy auf einen Blick."],
   ["uebersetzer","🌍","Übersetzer","Sprechen und Text in 17 Sprachen."],
   ["diktat","🎙️","Diktiergerät","Sprechen, korrigieren und Text kopieren."]]},
  {g:"Familie & Zuhause",f:"--orange",l:[
@@ -293,7 +297,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["hebel","diktat","ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
+const NEU=["geld","angeln","uhr","handy","hebel","diktat","ki","computer","zelle"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
