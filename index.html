@@ -241,6 +241,7 @@ const APPS=[
   ["markt","📈","Markt","Aktien, Krypto und Rohstoffe als Kacheln – wie Finanzen100."],
   ["chart","🕯️","Live-Chart","Live-Charts mit deinen eigenen Indikatoren."],
   ["btc","🟠","BTC-Terminal","Bitcoin live im Terminal – Bildschirm bleibt wach."],
+  ["hebel","⚖️","Hebelrechner","Margin, Hebel und Liquidationspreis – für OKX, BingX und Bitunix."],
   ["trading","📒","Trading-Tagebuch","Trades festhalten, Trefferquote sehen, Haltefrist im Blick."],
   ["nachrichten","📰","Meine Nachrichten","Das tägliche Börsen-Briefing."],
   ["morgen","☕","Morgenroutine","Deine Analyse am Morgen."]]},
@@ -292,7 +293,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["diktat","ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
+const NEU=["hebel","diktat","ki","computer","zelle","natur","physik","weltraum","video","schnitt","formel1simulator","flugsimulator"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
