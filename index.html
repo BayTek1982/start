@@ -142,8 +142,15 @@ header.kopf{position:relative}
 .k .bar div{height:100%;background:var(--f);box-shadow:0 0 8px var(--f);border-radius:4px}
 .stern{position:absolute;right:62px;top:16px;z-index:2;background:none;border:none;font-size:1rem;cursor:pointer;color:#2a3646;transition:.2s}
 .stern.an{color:var(--gold);text-shadow:0 0 10px var(--gold)}
-.bereich{margin-top:30px;scroll-margin-top:12px}
-.bereich .bk{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.bereich{margin-top:14px;scroll-margin-top:12px}
+.bereich .bk{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin-bottom:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;color:inherit;font:inherit;text-align:left;transition:border-color .2s}
+.bereich .bk:hover{border-color:var(--mut)}
+.bereich .pfeil{font-family:var(--mono);font-size:1rem;color:var(--mut);transition:transform .25s;display:inline-block}
+.bereich.zu .pfeil{transform:rotate(-90deg)}
+.bereich.zu .bento{display:none}
+.bereich.zu .bk{margin-bottom:0}
+.alle{display:flex;justify-content:flex-end;margin-top:14px}
+.alle button{background:none;border:none;color:var(--mut);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:6px}
 .bereich h2{font-size:.9rem}
 .bereich .anz{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--mut)}
 /* Info-Kacheln */
@@ -151,6 +158,7 @@ header.kopf{position:relative}
 .kurs{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-family:var(--mono);font-size:.9rem;font-variant-numeric:tabular-nums;border-bottom:1px dashed var(--line)}
 .kurs:last-child{border:none}
 .kurs b{color:var(--txt)}
+.kurs .usd{font-size:.72rem;font-weight:600;color:var(--gold);margin-top:1px;letter-spacing:.02em}
 .pille{font-family:var(--mono);font-size:.72rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:8px;background:var(--bg)}
 footer{color:var(--mut);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin:36px 0 10px}
 </style>
@@ -252,6 +260,7 @@ const APPS=[
   ["ct","☢️","CT-Schule","Röntgentechnik und Computertomographie verstehen."],
   ["guss","🔬","Gussfehler-Schule","Porosität, Gasblasen, Lunker und Kernbruch."],
   ["technik","⚙️","Auto-Technik-Schule","Motor, Getriebe, Turbo, E-Auto und Akku."],
+  ["eauto","🔋","Elektroauto-Schule","Akku, E-Motor, Laden, Reichweite und Kosten."],
   ["flug","✈️","Flug-Schule","Wie ein Flugzeug fliegt und gebaut wird."],
   ["naturgewalten","🌪️","Naturgewalten-Schule","Gewitter, Tornados, Hurrikane, Vulkane, Erdbeben."],
   ["natur","🌿","Natur-Schule","Tierarten, Pflanzen und Bäume mit echten Bildern."],
@@ -262,6 +271,8 @@ const APPS=[
   ["geraete","📲","Geräte-Schule","Smartphone, Tablet, Laptop & Co. verständlich erklärt."],
   ["funk","📡","Funknetz-Schule","Wie Handynetz, WLAN und Funk funktionieren."],
   ["zelle","🧬","Zell-Schule","Die biologische Zelle – Aufbau und Aufgaben."],
+  ["erfinder","💡","Erfinder-Schule","Erfindungen, die die Welt verändert haben."],
+  ["reparatur","🔧","Reparatur-Schule","Reparieren statt wegwerfen – mit kurzen Erklärvideos."],
   ["koerper","🫀","Körper-Schule","Der menschliche Körper – Organe, Knochen, Muskeln."],
   ["geld","🪙","Geld-Schule","Wie Geld entstand – vom Tausch über Münzen bis Bitcoin."],
   ["angeln","🎣","Angel-Schule","Fischkunde, Ausrüstung, Knoten, Köder und Recht in Bayern."],
@@ -301,7 +312,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["geraete","funk","koerper","gta","geld","angeln","uhr","handy","hebel","diktat"];
+const NEU=["eauto","erfinder","reparatur","geraete","funk","koerper","gta"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
@@ -315,16 +326,25 @@ function gruppe(L){const n=L.length,breit=n%3===2;const zellen=n+(breit?1:0);
  return L.map((x,i)=>{let e="";if(i===n-1){if(zellen%2===1)e+=" voll2";if(!breit&&n%3===1)e+=" voll3";}return kachel(x,breit&&i===0,e)}).join("")}
 function zeichnen(){let h="";
  const F=ALLE.filter(x=>favs.includes(x.a[0]));
- if(F.length)h+=`<div class="bereich"><div class="bk"><h2 style="color:var(--gold)">★ Favoriten</h2><span class="anz">${F.length} APPS</span></div><div class="bento anim">${gruppe(F)}</div></div>`;
- for(const g of APPS)h+=`<div class="bereich" id="b-${g.g.split(" ")[0].toLowerCase()}"><div class="bk"><h2 style="color:var(${g.f})">${g.g}</h2><span class="anz">${g.l.length} APPS</span></div><div class="bento anim">${gruppe(g.l.map(a=>({a,f:g.f})))}</div></div>`;
- $("#bereiche").innerHTML=h;
+ if(F.length)h+=`<div class="bereich ${offen("fav")?"":"zu"}" data-id="fav"><button class="bk" aria-expanded="${offen("fav")}"><h2 style="color:var(--gold)">★ Favoriten</h2><span class="anz">${F.length} APPS <span class="pfeil">▾</span></span></button><div class="bento anim">${gruppe(F)}</div></div>`;
+ for(const g of APPS){const id="b-"+g.g.split(" ")[0].toLowerCase();h+=`<div class="bereich ${offen(id)?"":"zu"}" id="${id}" data-id="${id}"><button class="bk" aria-expanded="${offen(id)}"><h2 style="color:var(${g.f})">${g.g}</h2><span class="anz">${g.l.length} APPS <span class="pfeil">▾</span></span></button><div class="bento anim">${gruppe(g.l.map(a=>({a,f:g.f})))}</div></div>`}
+ h=`<div class="alle"><button id="alleBtn">Alle aufklappen</button></div>`+h;
+ $("#bereiche").innerHTML=h;$("#alleBtn").textContent=irgendOffen()?"Alle zuklappen":"Alle aufklappen";
  $("#spruenge").innerHTML=APPS.map(g=>`<button style="color:var(${g.f});border-color:color-mix(in srgb,var(${g.f}) 45%,transparent)" data-b="b-${g.g.split(" ")[0].toLowerCase()}">${g.g} · ${g.l.length}</button>`).join("");filtern()}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-b]");if(b)document.getElementById(b.dataset.b)?.scrollIntoView({behavior:"smooth",block:"start"})});
+let auf=ls.get("kompass_auf",{});
+const offen=id=>auf[id]??(id==="fav");
+const irgendOffen=()=>$$("#bereiche .bereich").some(b=>offen(b.dataset.id));
+function setAuf(id,v){auf[id]=v;ls.set("kompass_auf",auf);const el=document.querySelector(`.bereich[data-id="${id}"]`);if(el){el.classList.toggle("zu",!v);el.querySelector(".bk").setAttribute("aria-expanded",v)}const a=$("#alleBtn");if(a)a.textContent=irgendOffen()?"Alle zuklappen":"Alle aufklappen"}
+document.addEventListener("click",e=>{
+ const k=e.target.closest(".bereich .bk");if(k){const id=k.parentElement.dataset.id;setAuf(id,!offen(id));return}
+ if(e.target.closest("#alleBtn")){const zu=irgendOffen();$$("#bereiche .bereich").forEach(b=>setAuf(b.dataset.id,!zu));return}
+ const b=e.target.closest("[data-b]");if(b){setAuf(b.dataset.b,true);document.getElementById(b.dataset.b)?.scrollIntoView({behavior:"smooth",block:"start"})}});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(!b)return;e.preventDefault();const s=b.dataset.fav;
  favs=favs.includes(s)?favs.filter(x=>x!==s):[...favs,s];ls.set("kompass_favs",favs);zeichnen()});
 function filtern(){const q=$("#suche").value.trim().toLowerCase();
  $$(".k[data-s]").forEach(k=>k.style.display=!q||k.dataset.s.includes(q)?"":"none");
- $$("#bereiche .bereich").forEach(b=>b.style.display=[...b.querySelectorAll(".k")].some(k=>k.style.display!=="none")?"":"none")}
+ $$("#bereiche .bereich").forEach(b=>{b.style.display=[...b.querySelectorAll(".k")].some(k=>k.style.display!=="none")?"":"none";b.classList.toggle("zu",q?false:!offen(b.dataset.id))});
+ $(".alle").style.display=q?"none":""}
 $("#suche").addEventListener("input",filtern);
 
 function uhr(){const d=new Date(),h=d.getHours();
@@ -348,10 +368,10 @@ async function wetter(){try{
  $("#w-mm").textContent=`${Math.round(mn)}° / ${Math.round(mx)}°`;$("#w-bar").style.width=Math.max(5,Math.min(100,(t-mn)/((mx-mn)||1)*100))+"%";
 }catch(e){$("#w-txt").innerHTML='Nicht erreichbar – <a href="https://wetter.kompassapps.de">Wetter-App öffnen</a>'}}
 async function krypto(){try{
- const j=await(await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=eur&include_24hr_change=true")).json();
+ const j=await(await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=eur,usd&include_24hr_change=true")).json();
  const n={bitcoin:"BTC",ethereum:"ETH",solana:"SOL"};
  $("#krypto").innerHTML=Object.keys(n).map(k=>{const c=j[k].eur_24h_change,p=c>=0;
-  return `<div class="kurs"><b>${n[k]}</b><span>${j[k].eur.toLocaleString("de-DE",{maximumFractionDigits:j[k].eur<100?2:0})} €<span class="pille ${p?"up":"down"}">${p?"▲ +":"▼ "}${c.toFixed(1).replace(".",",")} %</span></span></div>`}).join("");
+  return `<div class="kurs"><b>${n[k]}${k==="bitcoin"?`<div class="usd">${j[k].usd.toLocaleString("de-DE",{maximumFractionDigits:0})} $</div>`:""}</b><span>${j[k].eur.toLocaleString("de-DE",{maximumFractionDigits:j[k].eur<100?2:0})} €<span class="pille ${p?"up":"down"}">${p?"▲ +":"▼ "}${c.toFixed(1).replace(".",",")} %</span></span></div>`}).join("");
  $("#k-stand").textContent="Stand "+new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
 }catch(e){$("#krypto").innerHTML='<div class="d">Nicht erreichbar – <a href="https://markt.kompassapps.de">Markt öffnen</a></div>'}}
 zeichnen();wetter();krypto();setInterval(krypto,120000);
