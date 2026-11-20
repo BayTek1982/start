@@ -275,6 +275,7 @@ const APPS=[
   ["reparatur","🔧","Reparatur-Schule","Reparieren statt wegwerfen – mit kurzen Erklärvideos."],
   ["koerper","🫀","Körper-Schule","Der menschliche Körper – Organe, Knochen, Muskeln."],
   ["geld","🪙","Geld-Schule","Wie Geld entstand – vom Tausch über Münzen bis Bitcoin."],
+  ["unternehmen","🏢","Unternehmens-Schule","Wie BMW, Nvidia, Apple, Tesla & Co. entstanden sind."],
   ["angeln","🎣","Angel-Schule","Fischkunde, Ausrüstung, Knoten, Köder und Recht in Bayern."],
   ["lernen","🎓","Lern-App","Mathe und Englisch für die Kinder – spielerisch."],
   ["gta","🎮","GTA-Schule","Die Spielereihe Grand Theft Auto – alle Teile im Überblick."],
@@ -312,7 +313,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["eauto","erfinder","reparatur","geraete","funk","koerper","gta"];
+const NEU=["unternehmen","eauto","erfinder","reparatur","geraete","funk","koerper","gta"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
