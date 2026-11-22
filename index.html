@@ -289,6 +289,7 @@ const APPS=[
   ["arbeitszeit","⏱️","Arbeitszeit","Kommen und Gehen stempeln."],
   ["kalender","🗓️","Kalender","Termine und Notizbuch."],
   ["office","📝","Office","Text wie Word, Tabelle wie Excel und Notizen wie OneNote."],
+  ["organizer","🗂️","Organizer","Dokumente, Excel, Notizen, E-Mail-Adressen und Webseiten an einem Ort."],
   ["mogel","🔎","Mogel-Check","Mogelpackungen erkennen."],
   ["rechner","🧮","Rechner","Der Taschenrechner."],
   ["uhr","⏰","Uhr","Wecker, Weltuhr, Stoppuhr und Timer."],
@@ -315,7 +316,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["office","fitness","unternehmen","eauto","erfinder","reparatur"];
+const NEU=["organizer","office","fitness","unternehmen","eauto","erfinder","reparatur"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
