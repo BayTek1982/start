@@ -274,6 +274,7 @@ const APPS=[
   ["erfinder","💡","Erfinder-Schule","Erfindungen, die die Welt verändert haben."],
   ["reparatur","🔧","Reparatur-Schule","Reparieren statt wegwerfen – mit kurzen Erklärvideos."],
   ["koerper","🫀","Körper-Schule","Der menschliche Körper – Organe, Knochen, Muskeln."],
+  ["fitness","🏋️","Fitness-Schule","Fitnessübungen richtig ausführen – Schritt für Schritt."],
   ["geld","🪙","Geld-Schule","Wie Geld entstand – vom Tausch über Münzen bis Bitcoin."],
   ["unternehmen","🏢","Unternehmens-Schule","Wie BMW, Nvidia, Apple, Tesla & Co. entstanden sind."],
   ["angeln","🎣","Angel-Schule","Fischkunde, Ausrüstung, Knoten, Köder und Recht in Bayern."],
@@ -313,7 +314,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["unternehmen","eauto","erfinder","reparatur","geraete","funk","koerper","gta"];
+const NEU=["fitness","unternehmen","eauto","erfinder","reparatur"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
