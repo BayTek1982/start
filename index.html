@@ -296,7 +296,8 @@ const APPS=[
   ["handy","📱","Handy-Dashboard","Alles Wichtige fürs Handy auf einen Blick."],
   ["uebersetzer","🌍","Übersetzer","Sprechen und Text in 17 Sprachen."],
   ["diktat","🎙️","Diktiergerät","Diktieren, Handschrift scannen, Notizen und Aufgaben."],
-  ["vorlesen","🔊","Vorleser","Texte und Webseiten vorlesen lassen – einfach über Teilen."]]},
+  ["vorlesen","🔊","Vorleser","Texte und Webseiten vorlesen lassen – einfach über Teilen."],
+  ["steuer","🧾","Steuer-Kompass","Einkommensteuer schätzen – Erstattung sofort sehen."]]},
  {g:"Familie & Zuhause",f:"--orange",l:[
   ["familie","👨‍👩‍👧‍👦","Familien-Planer","Ämtchen, Punkte, Taschengeld und Wochenplan."],
   ["haus","🏡","Unser Haus","Das Haus in 3D mit Rundgang."],
@@ -317,7 +318,7 @@ const APPS=[
   ["kanaele","▶️","YouTube-Kanäle","Deine Lieblingskanäle – suchen und direkt öffnen."],
   ["klangwerk","🎵","Klangwerk","Dein YouTube-Kanal in Zahlen."]]}
 ];
-const NEU=["organizer","office","fitness","unternehmen","eauto","erfinder","reparatur"];
+const NEU=["steuer","vorlesen","organizer","office","fitness","unternehmen","eauto","erfinder","reparatur"];
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let favs=ls.get("kompass_favs",[]);
 const ALLE=APPS.flatMap(g=>g.l.map(a=>({a,f:g.f})));
